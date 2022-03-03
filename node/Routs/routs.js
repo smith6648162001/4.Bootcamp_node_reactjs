@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const{getAllmovies, getOneMovie, createOneMovie, updateOneMovie, deleteOneMovie} = require('../models/fun_model');
 
-router.get('/', (req,res)=>{
-    console.log("Paso 1 realizado")
-    res.send(`<h1>Todo bien y funcionamiento</h1>`)
-});
+router.get('/', getAllmovies);
+router.get('/:id', getOneMovie);
+router.post('/', createOneMovie);
+router.delete('/:id', deleteOneMovie);
+router.up('/:id', updateOneMovie);
 
 module.exports.inicio = router;
