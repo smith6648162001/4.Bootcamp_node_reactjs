@@ -1,4 +1,3 @@
-const { Model } = require('sequelize/types');
 const {ModeloPelicula} = require('./models');
 
 //la función para mostrar todas las instancias 
@@ -6,7 +5,7 @@ const {ModeloPelicula} = require('./models');
 
 const getAllmovies = async(req,res) => {
     try{
-        const Peliculas = await ModeloPelicula.findAll();
+        const Peliculas = await ModeloPelicula.findAll({attributes:['id_pelidula','title','content']});
         res.json(Peliculas);
     }catch (error){
         res.json({message: 'No se encuentran instancias'})
@@ -18,7 +17,7 @@ const getAllmovies = async(req,res) => {
 
 const getOneMovie =  async(req,res) =>{
     try{
-        const Pelicula_unica = await ModeloPelicula.findAll({where:{id: req.params.id}});
+        const Pelicula_unica = await ModeloPelicula.findAll({where: {id: req.params.id}});
         res.json(Pelicula_unica);
     }catch (error){
         res.json({mensaje:'No se encontró la instancia'})
@@ -44,13 +43,11 @@ const createOneMovie = async(req,res) => {
 //La función para Actualizar un registro
 
 const updateOneMovie = async(req,res) => {
-    try{
-        await ModeloPelicula.update(req.body({
-            where: {id: req.params.id}
-        }));
-        res.json({message: "Registro actualizado"});
-    }catch(error){
-        res.json({message: "No se ha podido actualizar el registro"})
+    try {
+        await ModeloPelicula.update(req.body({where: {id: req.params.id}}));
+        res.json({message: "Registro actualizado"})
+    } catch (error) {
+        res.json({message: "No se ha podido actualizar el registro"});
     }
 }
 
@@ -59,13 +56,11 @@ const updateOneMovie = async(req,res) => {
 //La función para eliminar un registro(=> ModeloPelicula)
 
 const deleteOneMovie = async (req,res) => {
-    try{
-        await ModeloPelicula.destroy({
-            where: {id: req.params.id}
-        });
-        res.json({message: "Eliminado correctamente"});
-    }catch(error){
-        res.json({message:"No se pudo eliminar"})
+    try {
+        await ModeloPelicula.destroy({where: {id: req.params.id}})
+        res.json({message: "Eliminado correctamente"})
+    } catch (error) {
+        res.json({message: "No se pudo eliminar"})
     }
 }
 

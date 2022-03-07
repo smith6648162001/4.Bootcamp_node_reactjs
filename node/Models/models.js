@@ -3,15 +3,15 @@
 //Se tienen que definir tantos modelos como entidades existan + sus relacionas n a n (En algunos casos)
 
 const {Sequelize, DataTypes} = require ('sequelize');
-const {database} = require('../Database/db');
+const {database} = require('../database/db');
 
 //console.log(database);  
 
 //Generar una instancia del modelo
 
-const ModeloPelicula = database.define('Pelicula',{
-    title:{type: DataTypes.STRING},
-    content:{type: DataTypes.STRING},
+const ModeloPelicula = database.define('entretenimientos',{
+    "title":{type: DataTypes.STRING},
+    "content": {type: DataTypes.STRING}
 })
 
 //console.log(ModeloPelicula);
